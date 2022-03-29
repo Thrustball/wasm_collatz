@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Collatz Calculator</title>
+    <script src="./jquery-3.6.0.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <script type="module">
+      import init, {greet, get_vector} from "./pkg/hello_wasm.js";
+
+      init()
+        .then(() => {
+          $("#btn1").click(() => {
+            var start = $("#start").val();
+            var end = parseInt($("#end").val());
+            var length = 10;
+            var text = "<ul>";
+            while(start != end) {
+              start = parseInt(start);
+              // console.log(`${start} gestartet`);
+              var x = greet(start);
+              x = parseInt(x);
+              if (x > length){text += `<li>${start}: ${x}</li>`;}
+              // console.log(`${start} finished`);
+              start++;
+            }
+
+            text += "</ul>";
+            $("#output").html(text);  
+
+
+
+        });
+        var x = get_vector();
+        var s = "";
+        // console.log(typeof(x));
+        // console.log(x);
+      });
+      
+    </script>
+    <script>
+
+      // function buttonClick(n) {
+      //     var x = greet(97);
+      //     document.getElementById("output").innerHTML = x;
+      //   }
+    </script>
+
+    <div id="output"></div>
+    <div id="control">
+      <label for="start">Starting number</label>
+      <input type="number" id="start" name="start" min="1">
+      <label for="end">End number</label>
+      <input type="number" id="end" name="end" min="1">  
+      <button id="btn1">Calculate</button>
+    </div>
+  </body>
+</html>
+
